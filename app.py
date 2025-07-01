@@ -24,7 +24,7 @@ def verify():
         img1 = read_image_from_url(img1_url)
         img2 = read_image_from_url(img2_url)
 
-        result = DeepFace.verify(img1, img2, enforce_detection=False)
+        result = DeepFace.verify(img1, img2, enforce_detection=True)
 
         return jsonify({
             "verified": result["verified"],
