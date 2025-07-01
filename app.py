@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from deepface import DeepFace
 import cv2
 import numpy as np
