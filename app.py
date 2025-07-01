@@ -6,6 +6,10 @@ import requests
 
 app = Flask(__name__)
 
+@app.route("/", methods=["GET"])
+def index():
+    return "API de verificación facial activa"
+    
 def read_image_from_url(url):
     response = requests.get(url)
     img_array = np.asarray(bytearray(response.content), dtype=np.uint8)
@@ -21,10 +25,13 @@ def verify():
         return jsonify({"error": "Faltan URLs de imagen"}), 400
 
     try:
-        img1 = read_image_from_url(img1_url)
-        img2 = read_image_from_url(img2_url)
+        img1 = data.get("img1")
+        img2 = data.get("img2")
 
-        result = DeepFace.verify(img1, img2, enforce_detection=True)
+        if not img1 or not img2:
+            return jsonify({"error": "Faltan img1 o img2 en el cuerpo del request"}), 400
+
+        result = DeepFace.verify(img1_path=img1, img2_path=img2, enforce_detection=True)
 
         return jsonify({
             "verified": result["verified"],
