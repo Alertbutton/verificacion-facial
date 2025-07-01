@@ -1,4 +1,7 @@
---use-deprecated=legacy-resolver
+setuptools==65.5.1
+wheel==0.40.0
+build==0.10.0
+
 flask==2.2.5
 deepface==0.0.79
 opencv-python==4.5.5.64
